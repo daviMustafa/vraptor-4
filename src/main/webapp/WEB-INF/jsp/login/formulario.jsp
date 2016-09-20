@@ -5,30 +5,28 @@
   Time: 14:24
   To change this template use File | Settings | File Templates.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
+
 <head>
     <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../base.css">
-    <title>Novo Produto</title>
+    <title>Formulário de Login</title>
 </head>
 <br>
 
 <body>
+
 <div class="container">
-    <h1>Adicionar Produto</h1>
+    <h1>Logar</h1>
 
-    <form action="<c:url value='/produto/adiciona' />" method="post">
-        Nome:
-        <input class="form-control" type="text" name="produto.nome" value="${produto.nome}"/>
-        Valor:
-        <input class="form-control" type="text" name="produto.valor" value="${produto.valor}"/>
-        Quantidade:
-        <input class="form-control" type="text" name="produto.quantidade" value="${produto.quantidade}"/>
+    <form class="form-signin" action="<c:url value='/login/autentica' />" method="post">
+        <h2 class="form-signin-heading">Faça login para acessar o VRaptor-Produtos</h2>
+        <input class="form-control" type="text" name="usuario.nome" value="${usuario.nome}"/>
+        <input class="form-control" type="password" name="usuario.senha" value="${usuario.senha}"/>
 
-        <input class="btn btn-primary" type="submit" value="Adicionar">
+        <input class="btn btn-primary" type="submit" value="Login">
     </form>
 </div>
 
@@ -36,6 +34,8 @@
     <div class="alert alert-danger"> ${erro.category} - ${erro.message} </div>
     </br>
 </c:forEach>
-
 </body>
 </html>
+
+
+

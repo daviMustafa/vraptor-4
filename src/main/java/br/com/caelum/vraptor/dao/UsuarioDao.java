@@ -1,14 +1,15 @@
 package br.com.caelum.vraptor.dao;
 
-import javax.persistence.EntityManager;
-
 import br.com.caelum.vraptor.model.Usuario;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
 public class UsuarioDao {
 
 	private final EntityManager em;
 	
-//	@Inject
+	@Inject
 	public UsuarioDao(EntityManager em) {
 		this.em = em;
 	}

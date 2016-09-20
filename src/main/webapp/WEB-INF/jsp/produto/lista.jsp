@@ -10,7 +10,7 @@
     <title>Listagem de Produtos</title>
 </head>
 <body>
-<h1>Listagem de Produtos</h1>
+<h1>Listagem de Produtos do ${usuarioLogado.usuario.nome}</h1>
 
 <a href="<c:url value='/produto/formulario'/>"> Adicionar mais produtos! </a>
 <br/>
