@@ -26,7 +26,7 @@ public class InitialDataObserver {
 
 		em.persist(new Usuario("davi", "davi"));
 
-		em.persist(new Produto("DVD/Blu-ray Justin Bieber", 120.8, 2));
+		em.persist(new Produto("DVD/Blu-ray Avengers", 120.8, 2));
 		em.persist(new Produto("Carro de F1", 1.99, 5));
 		em.persist(new Produto("Livro da Casa do Código", 29.9, 10));
 		

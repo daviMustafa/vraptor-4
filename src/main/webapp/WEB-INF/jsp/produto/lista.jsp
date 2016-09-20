@@ -25,6 +25,7 @@
             <td>Nome</td>
             <td>Valor</td>
             <td>Quantidade</td>
+            <td>Ações</td>
         </tr>
         </thead>
         <tbody>
@@ -33,6 +34,10 @@
                 <td>${produto.nome}</td>
                 <td>${produto.valor}</td>
                 <td>${produto.quantidade}</td>
+                <td>
+                    <c:url value="/produto/enviaPedidoDeNovosItens?produto.nome=${produto.nome}" var="url"/>
+                    <a href="${url}">Pedir mais itens!</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

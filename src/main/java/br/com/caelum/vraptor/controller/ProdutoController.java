@@ -6,8 +6,12 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.dao.ProdutoDao;
 import br.com.caelum.vraptor.model.Produto;
+import br.com.caelum.vraptor.simplemail.Mailer;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -17,14 +21,17 @@ public class ProdutoController {
 
 	private final Result result;
     private final ProdutoDao dao;
-    private Validator validator;
+    private final Validator validator;
+    private final Mailer mailer;
+    private static final String ENVIAR_PARA = "EMAILDESTINO";
 
 
 	@Inject
-	public ProdutoController(Result result, ProdutoDao dao, Validator validator) {
+	public ProdutoController(Result result, ProdutoDao dao, Validator validator, Mailer mailer) {
 		this.result = result;
         this.dao = dao;
         this.validator = validator;
+        this.mailer = mailer;
 	}
 	
 	/**
@@ -32,7 +39,7 @@ public class ProdutoController {
 	 * o this com o valor null do Result
 	 */
 	public ProdutoController() {
-		this(null, null, null);
+		this(null, null, null, null);
 	}
 
 	@Get("/")
@@ -65,6 +72,16 @@ public class ProdutoController {
 
         dao.adiciona(produto);
         result.include("mensagem", "Produto adicionado com sucesso");
+        result.redirectTo(this).lista();
+    }
+
+    @Get
+    public void enviaPedidoDeNovosItens(Produto produto) throws EmailException{
+        Email email = new SimpleEmail();
+        email.setSubject("Precisamos de mais estoque");
+        email.setMsg("O produto "+ produto.getNome() + " está em falta no estoque.");
+        email.addTo(ENVIAR_PARA);
+        mailer.send(email);
         result.redirectTo(this).lista();
     }
 }
